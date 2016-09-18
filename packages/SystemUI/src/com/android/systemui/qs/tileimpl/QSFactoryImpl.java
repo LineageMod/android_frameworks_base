@@ -48,6 +48,7 @@ import com.android.systemui.qs.tiles.ReadingModeTile;
 import com.android.systemui.qs.tiles.RotationLockTile;
 import com.android.systemui.qs.tiles.SyncTile;
 import com.android.systemui.qs.tiles.UsbTetherTile;
+import com.android.systemui.qs.tiles.SoundTile;
 import com.android.systemui.qs.tiles.UserTile;
 import com.android.systemui.qs.tiles.VolumeTile;
 import com.android.systemui.qs.tiles.WifiTile;
@@ -130,6 +131,8 @@ public class QSFactoryImpl implements QSFactory {
                 return new UsbTetherTile(mHost);
             case "volume_panel":
                 return new VolumeTile(mHost);
+            case "sound":
+                return new SoundTile(mHost);
         }
 
         // Intent tiles.
