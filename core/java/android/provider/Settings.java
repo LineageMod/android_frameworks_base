@@ -4158,6 +4158,16 @@ public final class Settings {
          * @hide
          */
         public static final String FONT_PACKAGES = "font_packages";
+		/**
+         * Number of qs columns on landscape orientation
+         * @hide
+         */
+        public static final String QS_LAYOUT_COLUMNS_LANDSCAPE = "qs_layout_columns_landscape";
+
+        /**
+         * @hide
+         */
+        public static final String QS_LAYOUT_COLUMNS = "qs_layout_columns";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
