@@ -141,6 +141,7 @@ public class QSCustomizer extends LinearLayout implements OnMenuItemClickListene
         mLightBarController = Dependency.get(LightBarController.class);
         updateNavBackDrop(getResources().getConfiguration());
         mQsCustomizerTopSpace = findViewById(R.id.qs_customizer_top_space);
+        updateSettings();
     }
 
     @Override
