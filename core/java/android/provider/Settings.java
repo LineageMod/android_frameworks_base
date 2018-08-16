@@ -4220,7 +4220,16 @@ public final class Settings {
          * @hide
          */
         public static final String ENABLE_GAMING_MODE = "enable_gaming_mode";
-
+		
+		 /**
+	         * Whether to show the battery info on the lockscreen while charging
+	         * @hide
+	         */
+	        public static final String LOCKSCREEN_BATTERY_INFO = "lockscreen_battery_info";
+	
+	        /** @hide */
+	        public static final Validator LOCKSCREEN_BATTERY_INFO_VALIDATOR = BOOLEAN_VALIDATOR;
+      
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
@@ -4407,6 +4416,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(QS_TILE_HIDE_TITLE);
             PRIVATE_SETTINGS.add(OMNI_QS_QUICKBAR_COLUMNS);
             PRIVATE_SETTINGS.add(WEATHER_LOCKSCREEN_UNIT);
+			PRIVATE_SETTINGS.add(LOCKSCREEN_BATTERY_INFO);
         }
 
         /**
@@ -4502,7 +4512,8 @@ public final class Settings {
             VALIDATORS.put(OMNI_QS_QUICKBAR_COLUMNS, OMNI_QS_QUICKBAR_COLUMNS_VALIDATOR);
             VALIDATORS.put(QS_LAYOUT_ROWS, QS_LAYOUT_ROWS_VALIDATOR);
             VALIDATORS.put(QS_LAYOUT_ROWS_LANDSCAPE, QS_LAYOUT_ROWS_LANDSCAPE_VALIDATOR);
-            VALIDATORS.put(WEATHER_LOCKSCREEN_UNIT, WEATHER_LOCKSCREEN_UNIT_VALIDATOR);
+            VALIDATORS.put(WEATHER_LOCKSCREEN_UNIT, WEATHER_LOCKSCREEN_UNIT_VALIDATOR);	
+            VALIDATORS.put(LOCKSCREEN_BATTERY_INFO, LOCKSCREEN_BATTERY_INFO_VALIDATOR);			
         }
 
         /**
