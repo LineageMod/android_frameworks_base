@@ -76,7 +76,8 @@ public class BatteryMeterView extends LinearLayout implements
     private SettingObserver mSettingObserver;
     private int mTextColor;
     private int mLevel;
-    private boolean mForceShowPercent;
+    private boolean misQsbHeader;
+    private int mShowPercent;
     private boolean mShowPercentAvailable;
     private boolean mCharging;
     private boolean mPowerSave;
@@ -161,7 +162,6 @@ public class BatteryMeterView extends LinearLayout implements
     }
 
     public void setForceShowPercent(boolean show) {
-        mForceShowPercent = show;
         updateShowPercent();
     }
 
@@ -293,14 +293,17 @@ public class BatteryMeterView extends LinearLayout implements
 
     private void updateShowPercent() {
         final boolean showing = mBatteryPercentView != null;
-        int style = Settings.System.getIntForUser(getContext().getContentResolver(),
+        int percentageStyle = Settings.System.getIntForUser(getContext().getContentResolver(),
                 SHOW_BATTERY_PERCENT, 0, mUser);
-        if (mForceShowPercent
-                || (getMeterStyle() != BatteryMeterDrawableBase.BATTERY_STYLE_HIDDEN
-                && (mForceShowPercent || mPowerSave || mCharging))) {
-            style = 1; // Default view
+        mShowPercent = percentageStyle;
+        boolean showAnyway = alwaysShowPercentage() || mPowerSave || mCharging;
+        if (!showAnyway
+                && getMeterStyle() == BatteryMeterDrawableBase.BATTERY_STYLE_HIDDEN) {
+            // don't show percentage
+            percentageStyle = 0;
         }
-        switch (style) {
+        if (showAnyway) percentageStyle = 1; // Default view
+        switch (percentageStyle) {
             case 1:
                 if (!showing) {
                     mBatteryPercentView = loadPercentView();
@@ -316,15 +319,13 @@ public class BatteryMeterView extends LinearLayout implements
                 break;
             case 2:
                 if (showing) {
-                    removeView(mBatteryPercentView);
-                    mBatteryPercentView = null;
+                    removePercentageView();
                 }
                 mDrawable.setShowPercent(true);
                 break;
             default:
                 if (showing) {
-                    removeView(mBatteryPercentView);
-                    mBatteryPercentView = null;
+                    removePercentageView();
                 }
                 mDrawable.setShowPercent(false);
                 break;
@@ -421,12 +422,22 @@ public class BatteryMeterView extends LinearLayout implements
         }
     }
 
+    public void isQsbHeader() {
+        misQsbHeader = true;
+    }
+
+    private boolean alwaysShowPercentage() {
+        return getMeterStyle() == BatteryMeterDrawableBase.BATTERY_STYLE_TEXT
+                || (misQsbHeader
+                && (getMeterStyle() == BatteryMeterDrawableBase.BATTERY_STYLE_HIDDEN
+                || (getMeterStyle() != BatteryMeterDrawableBase.BATTERY_STYLE_HIDDEN
+                && mShowPercent == 0/*hidden*/)));
+    }
+
     private void updateBatteryStyle(String styleStr) {
         final int style = styleStr == null ?
                 BatteryMeterDrawableBase.BATTERY_STYLE_PORTRAIT : Integer.parseInt(styleStr);
         mDrawable.setMeterStyle(style);
-
-        mForceShowPercent = false;
 
         switch (style) {
             case BatteryMeterDrawableBase.BATTERY_STYLE_TEXT:
@@ -434,19 +445,16 @@ public class BatteryMeterView extends LinearLayout implements
                     removeView(mBatteryIconView);
                     mBatteryIconView = null;
                 }
-                mForceShowPercent = true;
                 break;
             case BatteryMeterDrawableBase.BATTERY_STYLE_HIDDEN:
                 if (mBatteryIconView != null) {
                     removeView(mBatteryIconView);
                     mBatteryIconView = null;
                 }
+                removePercentageView();
                 break;
             default:
-                if (mBatteryPercentView != null) {
-                    removeView(mBatteryPercentView);
-                    mBatteryPercentView = null;
-                }
+                removePercentageView();
                 if (mBatteryIconView == null) {
                     mBatteryIconView = new ImageView(mContext);
                     mBatteryIconView.setImageDrawable(mDrawable);
@@ -472,5 +480,12 @@ public class BatteryMeterView extends LinearLayout implements
 
     private int getMeterStyle() {
         return mDrawable.getMeterStyle();
+    }
+
+    private void removePercentageView() {
+        if (mBatteryPercentView != null) {
+            removeView(mBatteryPercentView);
+            mBatteryPercentView = null;
+        }
     }
 }
