@@ -166,7 +166,7 @@ public class NotificationEntryManager implements Dumpable, NotificationInflater.
                 // We never want to open the app directly if the user clicks in between
                 // the notifications.
                 return;
-            } 
+            }
 
             // Mark notification for one frame.
             row.setJustClicked(true);
@@ -925,6 +925,10 @@ public class NotificationEntryManager implements Dumpable, NotificationInflater.
     public void updateNotificationRanking(NotificationListenerService.RankingMap ranking) {
         mNotificationData.updateRanking(ranking);
         updateNotifications();
+    }
+
+    public void onOverlayChanged() {
+        updateNotificationsOnDensityOrFontScaleChanged();
     }
 
     protected boolean shouldPeek(NotificationData.Entry entry) {
