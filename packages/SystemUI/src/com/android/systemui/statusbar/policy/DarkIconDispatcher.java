@@ -14,6 +14,7 @@
 
 package com.android.systemui.statusbar.policy;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.view.View;
@@ -37,6 +38,7 @@ public interface DarkIconDispatcher {
     // addDarkReceiver.
     void applyDark(DarkReceiver object);
 
+    void onOverlayChanged(Context context);
     int DEFAULT_ICON_TINT = Color.WHITE;
     Rect sTmpRect = new Rect();
     int[] sTmpInt2 = new int[2];
