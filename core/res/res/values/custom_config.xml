@@ -26,4 +26,7 @@
          0 - Celsius
          1 - Fahrenheit -->
     <integer name="weather_lockscreen_default_unit">0</integer>
+
+  <!-- True if the notifications should dynamically tint the app icon and app title -->
+  <bool name="config_allowNotificationIconTextTinting">true</bool>
 </resources>
