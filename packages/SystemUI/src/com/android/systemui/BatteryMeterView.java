@@ -163,6 +163,7 @@ public class BatteryMeterView extends LinearLayout implements
 
         setClipChildren(false);
         setClipToPadding(false);
+        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
     }
 
     public void setForceShowPercent(boolean show) {
