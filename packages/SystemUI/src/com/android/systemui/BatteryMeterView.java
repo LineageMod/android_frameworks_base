@@ -77,14 +77,11 @@ public class BatteryMeterView extends LinearLayout implements
     private final ImageView mBatteryIconView;
     private final CurrentUserTracker mUserTracker;
     private TextView mBatteryPercentView;
-<<<<<<< HEAD
 
     private boolean mCharging;
     private int mBatteryStyle = BATTERY_STYLE_PORTRAIT;
 
-=======
     private static final String FONT_FAMILY = "sans-serif-medium";
->>>>>>> c59548a3993... base: Fonts: Update keyguard when font changes
     private BatteryController mBatteryController;
     private SettingObserver mSettingObserver;
     private int mTextColor;
