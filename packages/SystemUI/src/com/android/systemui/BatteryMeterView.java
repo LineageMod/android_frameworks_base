@@ -80,7 +80,6 @@ public class BatteryMeterView extends LinearLayout implements
     private boolean misQsbHeader;
     private int mShowPercent;
     private boolean mShowPercentAvailable;
-    private boolean mCharging;
     private boolean mPowerSave;
 
     private int mDarkModeSingleToneColor;
