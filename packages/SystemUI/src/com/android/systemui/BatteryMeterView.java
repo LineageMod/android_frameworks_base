@@ -70,7 +70,7 @@ public class BatteryMeterView extends LinearLayout implements
     private TextView mBatteryPercentView;
 
     private boolean mCharging;
-    private int mBatteryStyle = BATTERY_STYLE_PORTRAIT;
+    //private int mBatteryStyle = BATTERY_STYLE_PORTRAIT;
 
     private static final String FONT_FAMILY = "sans-serif-medium";
     private BatteryController mBatteryController;
