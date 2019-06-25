@@ -172,8 +172,6 @@ public class BatteryMeterDrawableBase extends Drawable {
         mPowersavePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPowersavePaint.setColor(mPlusPaint.getColor());
         mPowersavePaint.setStyle(Style.STROKE);
-        mPowersavePaint.setStrokeWidth(context.getResources()
-                .getDimensionPixelSize(R.dimen.battery_powersave_outline_thickness));
 
         mPathEffect = new DashPathEffect(new float[]{3,2},0);
 
